@@ -1,16 +1,30 @@
 import '../css/App.css';
 import React, { useEffect, useState } from "react"
-import { authService, dbService } from '../myBase';
-// import AppRouter from "components/Router";
+import AppRouter from './Router';
+import { authService } from "../myBase";
 
 
-console.log(dbService)
 function App() {
+  const [init, setInit] = useState(false);
+  const [userObj, setUserObj] = useState(null);
 
+  useEffect(() => {
+    authService.onAuthStateChanged((user) => {
+      if (user) {
+        setUserObj(user);
+      }
+      setInit(true);
+    });
+  }, []);
   return (
-    <div>
-      hi
-    </div>
+    <>
+      {init ? (
+        <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} />
+      ) : (
+        "Initializing..."
+      )}
+
+    </>
   );
 }
 
