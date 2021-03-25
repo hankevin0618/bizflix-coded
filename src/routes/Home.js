@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ProductTest from '../components/ProductTest';
-import { authService } from "../myBase";
+import { authService, realtimeDB } from "../myBase";
 import { useHistory } from "react-router-dom";
 
-const Home = () => {
+
+const Home = ({ userObj }) => {
     const history = useHistory();
 
     const onLogOutClick = () => {
@@ -12,11 +13,14 @@ const Home = () => {
     };
 
     return (
+
         <div>
             {/* <ProductTest /> */}
             <button onClick={onLogOutClick}>Log Out</button>
         </div>
+
     )
 }
 
 export default Home;
+

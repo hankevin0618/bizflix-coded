@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { authService } from "../myBase";
+import { authService, realtimeDB } from "../myBase";
 
 const Auth = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [username, setUserName] = useState("")
     const [newAccount, setNewAccount] = useState(true);
     const [error, setError] = useState("");
 
@@ -15,6 +16,8 @@ const Auth = () => {
             setEmail(value);
         } else if (name === "password") {
             setPassword(value);
+        } else if (name === "username") {
+            setUserName(value)
         }
     };
     const onSubmit = async (event) => {
@@ -24,8 +27,21 @@ const Auth = () => {
             if (newAccount) {
                 data = await authService.createUserWithEmailAndPassword(
                     email,
-                    password
+                    password,
+
                 );
+
+                authService.currentUser.updateProfile({
+                    displayName: username
+                })
+
+                realtimeDB.ref('users/' + authService.currentUser.uid).set({
+                    email,
+                    displayName: username,
+                    verified: false
+
+                });
+
             } else {
                 data = await authService.signInWithEmailAndPassword(email, password);
             }
@@ -45,6 +61,14 @@ const Auth = () => {
                     placeholder="Email"
                     required
                     value={email}
+                    onChange={onChange}
+                />
+                <input
+                    name="username"
+                    type="text"
+                    placeholder="Username"
+                    required
+                    value={username}
                     onChange={onChange}
                 />
                 <input
@@ -68,3 +92,28 @@ const Auth = () => {
     );
 };
 export default Auth;
+
+        // 데이터베이스 쓰는방법
+        // realtimeDB.ref('users/' + userId).set({
+        //     email: email + "Hello",
+        //     verified: verified
+
+        // });
+
+        // 데이터베이스 읽는방법
+        // realtimeDB.ref('users/' + userId).on('value', (snapshot) => {
+        //     console.log(snapshot)
+        //     const data = snapshot.val();
+        //     console.log(data)
+        // })
+
+        // 데이터베이스 지우는방법
+        // const DeleteDB = async () => {
+        //     await realtimeDB.ref('users/' + userObj.uid).remove()
+        //         .then(function () {
+        //             console.log("Remove succeeded.")
+        //         })
+        //         .catch(function (error) {
+        //             console.log("Remove failed: " + error.message)
+        //         });
+        // }
