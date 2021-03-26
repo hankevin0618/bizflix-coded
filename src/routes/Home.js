@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import ProductTest from '../components/ProductTest';
 import { authService, realtimeDB } from "../myBase";
 import { useHistory } from "react-router-dom";
+import SubscriptionForm from '../components/SubscriptionForm';
 
 
 const Home = ({ userObj }) => {
@@ -15,7 +16,7 @@ const Home = ({ userObj }) => {
     return (
 
         <div>
-            {/* <ProductTest /> */}
+            <ProductTest />
             <button onClick={onLogOutClick}>Log Out</button>
         </div>
 

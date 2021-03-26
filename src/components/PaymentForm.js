@@ -21,7 +21,6 @@ const CARD_OPTIONS = {
 
 
 const PaymentForm = ({ productPrice }) => {
-    console.log(productPrice)
     const [success, setSuccess] = useState(false);
     const stripe = useStripe();
     const elements = useElements()
@@ -45,6 +44,7 @@ const PaymentForm = ({ productPrice }) => {
                 if (response.data.success) {
                     console.log("Successful Payment")
                     setSuccess(true)
+                    // verified true
                 }
 
             } catch (error) {

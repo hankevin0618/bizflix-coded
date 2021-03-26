@@ -2,14 +2,15 @@ import React from 'react'
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import PaymentForm from './PaymentForm';
-
-const PUBLIC_KEY = "pk_live_GVOP0nWue8vt5hVI1WvIl9VG";
+import SubscriptionForm from './SubscriptionForm';
+const PUBLIC_KEY = "pk_test_9ppcBpnAklh6c1jxi0Bzlo5V";
 
 const stripeTestPromise = loadStripe(PUBLIC_KEY)
 const StripeContainer = ({ productPrice }) => {
     return (
         <Elements stripe={stripeTestPromise}>
-            <PaymentForm productPrice={productPrice} />
+            {/* <PaymentForm productPrice={productPrice} /> */}
+            <SubscriptionForm email='kevin@navig8biz.com' />
         </Elements>
     )
 }

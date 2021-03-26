@@ -11,7 +11,7 @@ const ProductTest = () => {
         setProductPrice(100)
     }
     return (
-        <div className="App">
+        <div>
             {showItem ?
                 <StripeContainer productPrice={productPrice} />
                 :
