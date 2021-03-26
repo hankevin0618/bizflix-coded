@@ -1,25 +1,26 @@
 import React from 'react'
+import ProductTest from '../components/ProductTest';
+import { authService } from "../myBase";
 import { useHistory } from "react-router-dom";
-import { authService } from '../myBase';
 
 
-const Home = () => {
-    const history = useHistory()
+const Subscription = ({ userObj, setVerified }) => {
+    const history = useHistory();
+
     const onLogOutClick = () => {
         authService.signOut();
-        history.go(0)
+        history.go(0);
     };
 
     return (
 
         <div>
-            <h1>Dashboard Home</h1>
+            <ProductTest setVerified={setVerified} />
             <button style={{ marginTop: '50px' }} onClick={onLogOutClick}>Log Out</button>
-
         </div>
 
     )
 }
 
-export default Home;
+export default Subscription;
 

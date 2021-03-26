@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { authService, realtimeDB } from "../myBase";
 
-const Auth = () => {
+const Auth = ({ setVerified }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUserName] = useState("")
@@ -42,8 +42,19 @@ const Auth = () => {
 
                 });
 
+
             } else {
                 data = await authService.signInWithEmailAndPassword(email, password);
+                const checkVerification = async () => {
+                    try {
+                        await realtimeDB.ref('users/' + authService.currentUser.uid + '/verified').on("value", function (snapshot) {
+                            setVerified(snapshot.val())
+                        })
+                    } catch (error) {
+                        console.log(error)
+                    }
+                }
+                checkVerification()
             }
             console.log(data);
         } catch (error) {
@@ -63,14 +74,19 @@ const Auth = () => {
                     value={email}
                     onChange={onChange}
                 />
-                <input
-                    name="username"
-                    type="text"
-                    placeholder="Username"
-                    required
-                    value={username}
-                    onChange={onChange}
-                />
+
+                {newAccount &&
+
+                    <input
+                        name="username"
+                        type="text"
+                        placeholder="Username"
+                        required
+                        value={username}
+                        onChange={onChange}
+                    />
+
+                }
                 <input
                     name="password"
                     type="password"

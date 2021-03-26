@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import '../css/Payment.css';
+import { authService, realtimeDB } from '../myBase';
 
-export default function SubscriptionForm({ email }) {
+export default function SubscriptionForm({ email, setVerified }) {
 
     const CARD_OPTIONS = {
         iconStyle: 'solid',
@@ -24,6 +25,12 @@ export default function SubscriptionForm({ email }) {
 
     const stripe = useStripe();
     const elements = useElements();
+    const verifySubscription = () => {
+        realtimeDB.ref('users/' + authService.currentUser.uid).set({
+            verified: true
+        });
+        setVerified(true)
+    }
 
     const handleSubmitSub = async (event) => {
         event.preventDefault();
@@ -46,7 +53,7 @@ export default function SubscriptionForm({ email }) {
         } else {
 
             const res = await axios.post('http://localhost:4000/sub', { payment_method: result.paymentMethod.id, email: email, })
-            console.log(res.data)
+            // console.log(res.data)
 
             const { client_secret, status } = res.data;
 
@@ -58,14 +65,18 @@ export default function SubscriptionForm({ email }) {
                         console.log(result.error)
                     } else {
                         // show success message
-                        console.log('You got the money')
+                        console.log('You paid successfully')
+                        verifySubscription()
                     }
                 })
             } else {
                 // no additional information was added, success message to show
+                console.log('You paid successfully')
+                verifySubscription()
             }
         }
     }
+
     return (
         <form className="App" onSubmit={handleSubmitSub}>
             <fieldset className="FormGroup">
@@ -75,7 +86,5 @@ export default function SubscriptionForm({ email }) {
             </fieldset>
             <button>Subscribe</button>
         </form>
-
     )
-
 }

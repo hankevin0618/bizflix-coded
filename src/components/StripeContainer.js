@@ -6,11 +6,11 @@ import SubscriptionForm from './SubscriptionForm';
 const PUBLIC_KEY = "pk_test_9ppcBpnAklh6c1jxi0Bzlo5V";
 
 const stripeTestPromise = loadStripe(PUBLIC_KEY)
-const StripeContainer = ({ productPrice }) => {
+const StripeContainer = ({ productPrice, setVerified }) => {
     return (
         <Elements stripe={stripeTestPromise}>
             {/* <PaymentForm productPrice={productPrice} /> */}
-            <SubscriptionForm email='kevin@navig8biz.com' />
+            <SubscriptionForm email='kevin@navig8biz.com' setVerified={setVerified} />
         </Elements>
     )
 }

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import StripeContainer from './StripeContainer';
 
-const ProductTest = () => {
-    const [showItem, setShowItem] = useState(false)
+const ProductTest = ({ setVerified }) => {
+    const [showItem, setShowItem] = useState(true)
     const [productPrice, setProductPrice] = useState(0)
 
 
@@ -13,7 +13,11 @@ const ProductTest = () => {
     return (
         <div>
             {showItem ?
-                <StripeContainer productPrice={productPrice} />
+                <>
+                    <h2 style={{ textAlign: 'center' }}>You're not subscribing.</h2>
+                    <p style={{ textAlign: 'center' }} >To access, please subscribe.</p>
+                    <StripeContainer setVerified={setVerified} productPrice={productPrice} />
+                </>
                 :
                 <>
                     <h3>Product Name</h3>
