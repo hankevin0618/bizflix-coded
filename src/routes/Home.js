@@ -1,7 +1,8 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
-import { authService } from '../myBase';
+import { authService, realtimeDB } from '../myBase';
 
+console.log(authService.currentUser)
 
 const Home = () => {
     const history = useHistory()
@@ -14,6 +15,7 @@ const Home = () => {
 
         <div>
             <h1>Dashboard Home</h1>
+
             <button style={{ marginTop: '50px' }} onClick={onLogOutClick}>Log Out</button>
 
         </div>

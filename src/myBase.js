@@ -12,7 +12,7 @@ const firebaseConfig = {
     storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
     messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGIN_ID,
     appId: process.env.REACT_APP_FIREBASE_APP_ID,
-    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+    // measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
     databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL
 };
 
@@ -21,6 +21,6 @@ export default firebase.initializeApp(firebaseConfig);
 export const firebaseInstance = firebase;
 
 export const authService = firebase.auth();
-export const dbService = firebase.firestore();
+export const fbFireStore = firebase.firestore();
 export const storageService = firebase.storage();
 export const realtimeDB = firebase.database();
