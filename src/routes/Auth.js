@@ -1,14 +1,13 @@
 import React from "react";
 
+
 // Admin SDK를 이용하면 authentication에 직접 데이터를 입력가능
 
 const Auth = () => {
 
-
-
-
     return (
         <div>
+            Auth
         </div>
     );
 };

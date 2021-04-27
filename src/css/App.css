@@ -1,0 +1,9 @@
+.nav-item a{
+    color: black;
+    font-weight: 600;
+}
+
+.nav-item {
+    width: 100px;
+    text-align: center;
+}

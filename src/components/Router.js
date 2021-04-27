@@ -1,39 +1,47 @@
-import React, { useState } from "react";
+import React from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Auth from "../routes/Auth";
 import Home from "../routes/Home";
-import Subscription from "../routes/Subscription";
+import LoginPage from "../routes/LoginPage";
+import Header from "../components/Header";
+
+
 
 const AppRouter = ({ isLoggedIn, userObj }) => {
-    const [verified, setVerified] = useState(true)
+
 
     return (
-        <Router>
-            <Switch>
-                {isLoggedIn && !verified &&
-                    <>
-                        <Route exact path="/">
-                            <Subscription userObj={userObj} setVerified={setVerified} />
-                        </Route>
-                    </>
-                }
+        <>
+            <Router>
 
-                {isLoggedIn && verified &&
-                    <>
-                        <Route exact path="/">
-                            <Home userObj={userObj} setVerified={setVerified} />
-                        </Route>
-                    </>
-                }
+                <Switch>
+                    {isLoggedIn ?
+                        <>
+                            <Header loggedInUser={isLoggedIn} />
+                            <Route exact path="/">
+                                <Home userObj={userObj} />
+                            </Route>
+                        </>
 
-                <>
-                    <Route exact path="/">
-                        <Auth setVerified={setVerified} />
-                    </Route>
-                </>
+                        :
 
-            </Switch>
-        </Router >
+                        <>
+                            <Route exact path="/">
+                                <Header loggedInUser={isLoggedIn} />
+                                <Auth />
+                            </Route>
+
+                            <Route exact path="/login">
+                                <LoginPage />
+                            </Route>
+                        </>
+
+                    }
+
+
+                </Switch>
+            </Router >
+        </>
     );
 };
 export default AppRouter;
