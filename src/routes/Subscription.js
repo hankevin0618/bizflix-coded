@@ -1,5 +1,5 @@
 import React from 'react'
-import ProductTest from '../components/ProductTest';
+import ProductTest from '../components/Payment/ProductTest';
 import { authService } from "../myBase";
 import { useHistory } from "react-router-dom";
 

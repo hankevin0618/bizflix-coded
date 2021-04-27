@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
-import { authService, realtimeDB } from '../myBase';
+import { authService } from '../myBase';
 
 console.log(authService.currentUser)
 
