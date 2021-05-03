@@ -27,3 +27,23 @@
     color: white;
     transition: 0.5s;
 }
+
+input {
+    background-color: #f5f5f5;
+    border: 1px solid #00000021;
+    padding: 10px;
+}
+
+button.snsBtn {
+    background: transparent;
+    border: none;
+    width:100%;
+}
+
+#black-input {
+    background-color: #3C3C3C;
+    color: white;
+    font-weight: 700;
+    border-radius: 25px;
+    width: 125px;
+}

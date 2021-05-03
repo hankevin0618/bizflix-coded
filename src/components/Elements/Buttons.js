@@ -1,6 +1,12 @@
-export const GreenButton = () => {
+export const GreenButton = ({ value }) => {
 
     return (
-        <button id="green-button" >Sign Up</button>
+        <button id="green-button" >{value}</button>
+    )
+}
+
+export const BlackInput = ({ value }) => {
+    return (
+        <input id="black-input" type="submit" value={value} />
     )
 }

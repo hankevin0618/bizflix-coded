@@ -2,7 +2,12 @@ import '../css/App.css';
 import React, { useEffect, useState } from "react"
 import AppRouter from './Router';
 import { authService } from "../myBase";
+import { library } from '@fortawesome/fontawesome-svg-core';
 
+import { fab } from '@fortawesome/free-brands-svg-icons';
+
+
+library.add(fab);
 
 
 function App() {
