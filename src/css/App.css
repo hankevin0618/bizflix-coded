@@ -1,3 +1,7 @@
+p{
+    font-family: 'Roboto'
+}
+
 .nav-item a{
     color: black;
     font-weight: 600;
@@ -46,4 +50,31 @@ button.snsBtn {
     font-weight: 700;
     border-radius: 25px;
     width: 125px;
+}
+
+.signup-type-images{
+    opacity: 0.6;
+
+}
+
+.signup-type-images:hover{
+    opacity: 1;
+    transition: 0.4s;
+}
+
+.signup-type-images.active{
+    opacity: 1;    
+
+}
+
+.signup-user-type-info {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    color: white;
+    margin: 30px 30px;
+    margin-bottom: 0;
 }

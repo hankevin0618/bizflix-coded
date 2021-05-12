@@ -15,7 +15,7 @@ export const GoogleButton = (type) => {
             default:
                 break;
         }
-        if (type.type == "signIn") {
+        if (type.type === "signIn") {
             console.log('signIn')
         }
     }
@@ -39,7 +39,7 @@ export const FacebookButton = (type) => {
             default:
                 break;
         }
-        if (type.type == "signIn") {
+        if (type.type === "signIn") {
             console.log('signIn')
         }
     }
@@ -63,7 +63,7 @@ export const GithubButton = (type) => {
             default:
                 break;
         }
-        if (type.type == "signIn") {
+        if (type.type === "signIn") {
             console.log('signIn')
         }
     }
