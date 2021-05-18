@@ -2,9 +2,13 @@ import React from "react"
 import { Nav, NavItem } from 'reactstrap'
 import logoImage from "../images/logo_b.png"
 import { Link } from "react-router-dom";
+import { authService } from '../myBase';
 
 const Header = ({ loggedInUser }) => {
-
+    const onLogOutClick = () => {
+        authService.signOut();
+        window.location.reload();
+    }
     const container = {
         padding: "10px",
         boxShadow: "1px 1px 7px 1px #0000001c",
@@ -16,14 +20,11 @@ const Header = ({ loggedInUser }) => {
         borderRight: "2px solid black",
     }
 
-
-
     const LinkLogin = {
         color: 'black',
         fontWeight: 600,
         marginLeft: '60vw'
     }
-
 
     return (
         <Nav className="align-items-center" style={container}>
@@ -34,12 +35,12 @@ const Header = ({ loggedInUser }) => {
             </div>
             <div id="seperator" style={seperator} ></div>
             <NavItem>
-                <Link href="#">
+                <Link to="#">
                     Board
                 </Link>
             </NavItem>
             <NavItem>
-                <Link href="#">
+                <Link to="#">
                     Help
                 </Link>
             </NavItem>
@@ -53,12 +54,7 @@ const Header = ({ loggedInUser }) => {
                 </NavItem>
 
                 :
-
-                <NavItem>
-                    <Link href="#" style={LinkLogin}>
-                        Logout
-                </Link>
-                </NavItem>
+                <Link to='/' onClick={onLogOutClick}>Logout</Link>
 
             }
 

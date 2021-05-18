@@ -3,7 +3,7 @@ import { BlackInput } from '../../components/Elements/Buttons'
 import logoImage from "../../images/logo_b.png"
 import { GoogleButton, FacebookButton, GithubButton } from '../../components/Elements/SNSButtons'
 import { authService, realtimeDB } from "../../myBase";
-
+import { Redirect } from 'react-router-dom'
 
 const logoStyle = {
     display: 'block',
@@ -22,7 +22,6 @@ const RightPanel = ({ type, userType }) => {
     const [password, setPassword] = useState("");
     const [username, setUserName] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
-    // const [newAccount, setNewAccount] = useState(true);
     const [error, setError] = useState("");
 
     const onChange = (event) => {
@@ -40,10 +39,16 @@ const RightPanel = ({ type, userType }) => {
         }
     };
 
-
     if (type === 'signIn') {
-        const onSubmit = () => {
-            // data = await authService.signInWithEmailAndPassword(email, password);
+        const onSubmit = async (event) => {
+
+            event.preventDefault()
+            let data;
+            data = await authService.signInWithEmailAndPassword(email, password);
+            console.log(data);
+
+
+            // 페이먼트 시작하면 넣기
             // const checkVerification = async () => {
             //     try {
             //         await realtimeDB.ref('users/' + authService.currentUser.uid + '/verified').on("value", function (snapshot) {
@@ -62,8 +67,8 @@ const RightPanel = ({ type, userType }) => {
                 <div className="bg-white" style={{ width: '35%' }}>
                     <img src={logoImage} style={logoStyle} alt="Logo" />
                     <form onSubmit={onSubmit} style={formStyle} className="px-3">
-                        <input required type="text" name="email" placeholder="Email" />
-                        <input required type="password" name="password" placeholder="Password" />
+                        <input onChange={onChange} required type="text" name="email" placeholder="Email" />
+                        <input onChange={onChange} required type="password" name="password" placeholder="Password" />
                         <div>
                             <p className="text-center font-weight-bold" style={{ color: 'dimgray' }}>
                                 Sign In Options
@@ -95,17 +100,17 @@ const RightPanel = ({ type, userType }) => {
 
                 );
 
-                // authService.currentUser.updateProfile({
-                //     displayName: username
-                // })
+                authService.currentUser.updateProfile({
+                    displayName: username
+                })
 
-                // realtimeDB.ref('users/' + authService.currentUser.uid).set({
-                //     email,
-                //     displayName: username,
-                //     phoneNumber,
-                //     userType
+                realtimeDB.ref('users/' + authService.currentUser.uid).set({
+                    email,
+                    displayName: username,
+                    phoneNumber,
+                    userType
 
-                // });
+                });
 
                 console.log(data);
             } catch (error) {
