@@ -4,7 +4,7 @@ import logoImage from "../images/logo_b.png"
 import { Link } from "react-router-dom";
 import { authService } from '../myBase';
 
-const Header = ({ loggedInUser }) => {
+const Header = ({ loggedInUser, userType }) => {
     const onLogOutClick = () => {
         authService.signOut();
         window.location.reload();
@@ -34,6 +34,7 @@ const Header = ({ loggedInUser }) => {
                 </Link>
             </div>
             <div id="seperator" style={seperator} ></div>
+            {loggedInUser && <NavItem> <Link to="#" > Profile </Link></NavItem>}
             <NavItem>
                 <Link to="#">
                     Board
@@ -54,7 +55,11 @@ const Header = ({ loggedInUser }) => {
                 </NavItem>
 
                 :
-                <Link to='/' onClick={onLogOutClick}>Logout</Link>
+                <div className="d-flex ml-5" style={{ columnGap: '10px' }}>
+                    <div><p style={{ textTransform: 'uppercase' }}>{userType}</p></div>
+                    <div>Score</div>
+                    <Link to='/' onClick={onLogOutClick}>Logout</Link>
+                </div>
 
             }
 

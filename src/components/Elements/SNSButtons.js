@@ -4,8 +4,6 @@ import { authService, firebaseInstance, realtimeDB } from '../../myBase'
 
 export const SNSLoginButton = ({ userType }) => {
 
-    console.log(userType)
-
     const onSocialClick = async (event) => {
         event.preventDefault()
         const { target: { dataset: { icon } } } = event;
