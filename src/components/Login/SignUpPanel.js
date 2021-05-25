@@ -35,7 +35,7 @@ const userTypeContainer = {
 
 const SignUpPanel = ({ setIsSignInPage }) => {
     const [isBuilderClicked, setIsBuilderClicked] = useState(true)
-    const [userType, setUserType] = useState(null)
+    const [userType, setUserType] = useState('builder')
     const onClick = () => {
         setIsSignInPage(true)
     }

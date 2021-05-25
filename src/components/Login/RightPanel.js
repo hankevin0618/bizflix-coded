@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { BlackInput } from '../../components/Elements/Buttons'
 import logoImage from "../../images/logo_b.png"
-import { GoogleButton, FacebookButton, GithubButton } from '../../components/Elements/SNSButtons'
+import { SNSLoginButton } from '../../components/Elements/SNSButtons'
 import { authService, realtimeDB } from "../../myBase";
-import { Redirect } from 'react-router-dom'
 
 const logoStyle = {
     display: 'block',
@@ -41,7 +40,6 @@ const RightPanel = ({ type, userType }) => {
 
     if (type === 'signIn') {
         const onSubmit = async (event) => {
-
             event.preventDefault()
             let data;
             data = await authService.signInWithEmailAndPassword(email, password);
@@ -69,22 +67,21 @@ const RightPanel = ({ type, userType }) => {
                     <form onSubmit={onSubmit} style={formStyle} className="px-3">
                         <input onChange={onChange} required type="text" name="email" placeholder="Email" />
                         <input onChange={onChange} required type="password" name="password" placeholder="Password" />
-                        <div>
-                            <p className="text-center font-weight-bold" style={{ color: 'dimgray' }}>
-                                Sign In Options
+                        <div className="text-center mt-4" >
+                            <BlackInput value="Sign In" />
+                        </div>
+                    </form>
+                    <div>
+                        <p className="text-center font-weight-bold mt-5" style={{ color: 'dimgray' }}>
+                            Sign In Options
                     </p>
-                            <div className="d-flex p-3">
-                                <GoogleButton type="signIn" />
-                                <FacebookButton type="signIn" />
-                                <GithubButton type="signIn" />
-
-                            </div>
-                            <div className="text-center mt-4" >
-                                <BlackInput value="Sign In" />
-                            </div>
+                        <div className="d-flex p-3">
+                            <SNSLoginButton userType={userType} />
                         </div>
 
-                    </form>
+                    </div>
+
+
                 </div>
             </>
         )
@@ -129,22 +126,21 @@ const RightPanel = ({ type, userType }) => {
                         <input onChange={onChange} required type="password" name="password" placeholder="Password" />
                         <input onChange={onChange} required type="number" name="phoneNumber" placeholder="Phone Number" />
                         <p style={{ color: 'red', textAlign: 'center' }}> {error} </p>
-                        <div>
-                            <p className="text-center font-weight-bold" style={{ color: 'dimgray' }}>
-                                Sign Up Options
+                        <div className="text-center" >
+                            <BlackInput value="Sign Up" />
+                        </div>
+                    </form>
+                    <div>
+                        <p className="text-center font-weight-bold mt-3" style={{ color: 'dimgray' }}>
+                            Sign Up Options
                     </p>
-                            <div className="d-flex p-3">
-                                <GoogleButton type="signIn" />
-                                <FacebookButton type="signIn" />
-                                <GithubButton type="signIn" />
-
-                            </div>
-                            <div className="text-center mt-4" >
-                                <BlackInput value="Sign Up" />
-                            </div>
+                        <div className="d-flex p-3">
+                            <SNSLoginButton userType={userType} />
                         </div>
 
-                    </form>
+                    </div>
+
+
                 </div>
             </>
         )
