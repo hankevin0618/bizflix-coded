@@ -3,6 +3,7 @@ import { BlackInput } from '../../components/Elements/Buttons'
 import logoImage from "../../images/logo_b.png"
 import { SNSLoginButton } from '../../components/Elements/SNSButtons'
 import { authService, realtimeDB } from "../../myBase";
+import { useHistory } from 'react-router';
 
 const logoStyle = {
     display: 'block',
@@ -22,6 +23,8 @@ const RightPanel = ({ type, userType }) => {
     const [username, setUserName] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const [error, setError] = useState("");
+
+    let history = useHistory();
 
     const onChange = (event) => {
         const {
@@ -43,7 +46,8 @@ const RightPanel = ({ type, userType }) => {
             event.preventDefault()
             let data;
             data = await authService.signInWithEmailAndPassword(email, password);
-            console.log(data);
+            history.push("/profile")
+
 
 
             // 페이먼트 시작하면 넣기

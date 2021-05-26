@@ -78,3 +78,7 @@ button.snsBtn {
     margin: 30px 30px;
     margin-bottom: 0;
 }
+
+.nav-link.active {
+    color: red ;
+}

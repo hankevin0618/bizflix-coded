@@ -34,6 +34,7 @@ const Header = ({ loggedInUser, userType }) => {
                 </Link>
             </div>
             <div id="seperator" style={seperator} ></div>
+
             {loggedInUser && <NavItem> <Link to="#" > Profile </Link></NavItem>}
             <NavItem>
                 <Link to="#">

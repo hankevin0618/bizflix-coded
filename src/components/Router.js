@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Redirect, HashRouter as Router, Route, Switch } from "react-router-dom";
+import { Redirect, BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Auth from "../routes/Auth";
 import Profile from "../routes/Profile";
 import LoginPage from "../routes/LoginPage";
 import Header from "../components/Header";
 import { authService, realtimeDB } from "../myBase";
+import NavBar from "./NavBar";
+import Board from "../routes/Board";
 
 
 const AppRouter = ({ isLoggedIn, userObj }) => {
     const [userType, setUserType] = useState('')
+
     useEffect(() => {
         try {
             authService.onAuthStateChanged((user) => {
@@ -32,16 +35,23 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
                         <>
 
                             <Route exact path="/">
-                                <Redirect to="/profile" />
+                                <NavBar loggedInUser={isLoggedIn} userType={userType} />
 
                             </Route>
+
                             <Route exact path="/login" >
                                 <Redirect to="/" />
                             </Route>
 
                             <Route exact path="/profile">
-                                <Header loggedInUser={isLoggedIn} userType={userType} />
+                                {/* <Header loggedInUser={isLoggedIn} userType={userType} /> */}
+                                <NavBar loggedInUser={isLoggedIn} userType={userType} />
                                 <Profile userObj={userObj} />
+                            </Route>
+
+                            <Route exact path="/board/">
+                                <NavBar loggedInUser={isLoggedIn} userType={userType} />
+                                <Board />
                             </Route>
 
                         </>

@@ -1,13 +1,23 @@
 import React from 'react'
+import { useLocation } from 'react-router';
 import ProfilePanel from '../components/Elements/ProfilePanel';
+import { ResumeForm } from '../components/Profile/ResumeForm';
 
 
 const Profile = () => {
+
     return (
 
-        <div>
+        <div className="d-flex" style={{ background: '#2286E2' }}>
             <ProfilePanel />
-            <h1>Profile</h1>
+            <div className="d-block m-auto">
+                <div style={{ backgroundColor: 'white', padding: '100px', margin: '100px auto', display: 'block' }}>
+                    <h1>Resume</h1>
+                    <h4>This resume will be shown to your clients and teams.</h4>
+                    <ResumeForm />
+                </div>
+
+            </div>
         </div>
 
     )
