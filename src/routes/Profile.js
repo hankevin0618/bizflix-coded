@@ -1,5 +1,4 @@
 import React from 'react'
-import { useLocation } from 'react-router';
 import ProfilePanel from '../components/Elements/ProfilePanel';
 import { ResumeForm } from '../components/Profile/ResumeForm';
 

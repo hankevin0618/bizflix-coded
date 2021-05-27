@@ -14,9 +14,9 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
 
     useEffect(() => {
         try {
-            authService.onAuthStateChanged((user) => {
+            authService.onAuthStateChanged(async (user) => {
                 if (user) {
-                    realtimeDB.ref('users/' + authService.currentUser.uid + '/userType').on("value", (snapshot) => {
+                    await realtimeDB.ref('users/' + authService.currentUser.uid + '/userType').on("value", (snapshot) => {
                         setUserType(snapshot.val())
                     })
                     console.log("Now usertype is: " + userType)
@@ -26,7 +26,7 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
         } catch (error) {
             console.log(error)
         }
-    }, [userObj, userType])
+    }, [userType])
     return (
         <>
             <Router>

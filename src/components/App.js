@@ -8,9 +8,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 
 library.add(fab, fas);
 
-
 function App() {
-
   const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null);
 

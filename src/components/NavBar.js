@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory, useLocation } from "react-router-dom";
 import {
     Collapse,
@@ -8,11 +8,6 @@ import {
     Nav,
     NavItem,
     NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    NavbarText
 } from 'reactstrap';
 import logoImage from "../images/logo_b.png"
 import { authService } from '../myBase';
@@ -23,12 +18,20 @@ const NavBar = ({ loggedInUser, userType }) => {
 
     let location = useLocation();
 
-    let test = location.pathname.slice(1) + 'Nav'
+    let getNavMenu = location.pathname.slice(1) + 'Nav'
 
-    // if (!document.getElementById(test).classList.contains('active')) {
-    //     document.getElementById(test).classList.add('active')
-    // }
+    useEffect(() => {
+        if (location.pathname !== '/') {
+            try {
+                document.getElementById(getNavMenu).classList.add('active')
 
+            } catch (error) {
+                throw new Error(error)
+            }
+
+        }
+
+    }, [getNavMenu])
 
     let history = useHistory();
     const onLogOutClick = () => {
@@ -58,25 +61,29 @@ const NavBar = ({ loggedInUser, userType }) => {
                         }
 
                         <NavItem>
-                            <NavLink href="/board">Board</NavLink>
+                            <NavLink href="/board" id="boardNav">Board</NavLink>
                         </NavItem>
-                        <UncontrolledDropdown nav inNavbar>
+                        <NavItem>
+                            <NavLink href="/team" id="teamNav">Team</NavLink>
+                        </NavItem>
+
+                        {/* <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret>
                                 Options
-              </DropdownToggle>
+                            </DropdownToggle>
                             <DropdownMenu right>
                                 <DropdownItem>
                                     Option 1
-                </DropdownItem>
+                             </DropdownItem>
                                 <DropdownItem>
                                     Option 2
-                </DropdownItem>
+                              </DropdownItem>
                                 <DropdownItem divider />
                                 <DropdownItem>
                                     Reset
-                </DropdownItem>
+                              </DropdownItem>
                             </DropdownMenu>
-                        </UncontrolledDropdown>
+                        </UncontrolledDropdown> */}
                     </Nav>
                     {!loggedInUser
 

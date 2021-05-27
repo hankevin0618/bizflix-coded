@@ -47,6 +47,7 @@ const RightPanel = ({ type, userType }) => {
             let data;
             data = await authService.signInWithEmailAndPassword(email, password);
             history.push("/profile")
+            console.log(data)
 
 
 

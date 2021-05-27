@@ -44,7 +44,7 @@ button.snsBtn {
     width:100%;
 }
 
-#black-input {
+.black-input {
     background-color: #3C3C3C;
     color: white;
     font-weight: 700;
@@ -81,4 +81,8 @@ button.snsBtn {
 
 .nav-link.active {
     color: red ;
+}
+
+.d-grid {
+    display: grid;
 }

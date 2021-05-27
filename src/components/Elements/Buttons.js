@@ -7,6 +7,6 @@ export const GreenButton = ({ value }) => {
 
 export const BlackInput = ({ value }) => {
     return (
-        <input id="black-input" type="submit" value={value} />
+        <input className="black-input" type="submit" value={value} />
     )
 }
