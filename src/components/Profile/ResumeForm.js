@@ -93,14 +93,14 @@ export const ResumeForm = () => {
     }
 
     for (let index = 0; index < numWorkExperiences; index++) {
-        workExperiences.push(<input key={index} id={index} type="text" className="work-experience" />)
+        workExperiences.push(<input key={index} id={"wkep" + index} type="text" className="work-experience" />)
     }
 
     for (let index = 0; index < numSkillsQualifications; index++) {
-        skillsQualifications.push(<input key={index} className="skill-qualification" type="text" />)
+        skillsQualifications.push(<input key={index} id={"sq" + index} className="skill-qualification" type="text" />)
     }
     for (let index = 0; index < numPortfolios; index++) {
-        portfolios.push(<input key={index} className="portfolio" type="text" />)
+        portfolios.push(<input key={index} id={"pf" + index} className="portfolio" type="text" />)
     }
 
 
@@ -153,21 +153,25 @@ export const ResumeForm = () => {
             await realtimeDB.ref('users/' + authService.currentUser.uid + "/resume/data/").on('value', (snapshot) => {
                 const data = snapshot.val();
                 Object.keys(data).map((key, index) => {
+                    console.log(data[key])
                     switch (key) {
                         case "industry":
                             if (data[key]) {
                                 document.getElementById("industry_input").value = data[key]
+                                setIndustry(data[key])
                             }
                             break;
                         case "jobRole":
                             if (data[key]) {
                                 document.getElementById("jobRole_input").value = data[key]
+                                setJobRole(data[key])
                             }
                             break;
 
                         case "message":
                             if (data[key]) {
                                 document.getElementById("message_input").value = data[key]
+                                setMessage(data[key])
                             }
                             break;
                         case "portfolios_Submission":
