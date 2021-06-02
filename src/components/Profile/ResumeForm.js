@@ -5,7 +5,7 @@ import { authService, realtimeDB } from '../../myBase'
 export const ResumeForm = () => {
     const [numWorkExperiences, setNumWorkExperiences] = useState(1)
     const [numSkillsQualifications, setNumSkillsQualifications] = useState(1)
-    const [numPortfolios, setPortfolios] = useState(1)
+    const [numPortfolios, setNumPortfolios] = useState(1)
 
     const [jobRole, setJobRole] = useState("")
     const [industry, setIndustry] = useState("")
@@ -115,7 +115,7 @@ export const ResumeForm = () => {
                 setNumSkillsQualifications(numSkillsQualifications + 1)
                 break;
             case "portfolios":
-                setPortfolios(numPortfolios + 1)
+                setNumPortfolios(numPortfolios + 1)
                 break;
             default:
                 break;
@@ -137,7 +137,7 @@ export const ResumeForm = () => {
                 break;
             case "portfolios":
                 if (numPortfolios > 1) {
-                    setPortfolios(numPortfolios - 1)
+                    setNumPortfolios(numPortfolios - 1)
                 }
                 break;
             default:
@@ -147,13 +147,9 @@ export const ResumeForm = () => {
 
     useEffect(() => {
         const getResume = async () => {
-            // await setTimeout(() => {
-
-            // }, 5000)
             await realtimeDB.ref('users/' + authService.currentUser.uid + "/resume/data/").on('value', (snapshot) => {
                 const data = snapshot.val();
-                Object.keys(data).map((key, index) => {
-                    console.log(data[key])
+                Object.keys(data).map(async (key, index) => {
                     switch (key) {
                         case "industry":
                             if (data[key]) {
@@ -175,22 +171,57 @@ export const ResumeForm = () => {
                             }
                             break;
                         case "portfolios_Submission":
+                            if (data[key]) {
+                                setNumPortfolios(data[key].length)
+                                try {
+                                    for (let index = 0; index < data[key].length; index++) {
+                                        let item = document.getElementById(data[key][index].id);
+                                        let DBvalue = data[key][index].value
+                                        item.value = DBvalue
+                                    }
+
+                                } catch (error) {
+                                    console.log(error)
+                                }
+                            }
                             break;
                         case "skillsQualifications_Submission":
+                            if (data[key]) {
+                                setNumSkillsQualifications(data[key].length)
+                                try {
+                                    for (let index = 0; index < data[key].length; index++) {
+                                        let item = document.getElementById(data[key][index].id);
+                                        let DBvalue = data[key][index].value
+                                        item.value = DBvalue
+                                    }
+
+                                } catch (error) {
+                                    console.log(error)
+                                }
+                            }
                             break;
                         case "workExperiences_Submission":
+                            if (data[key]) {
+                                setNumWorkExperiences(data[key].length)
+                                try {
+                                    for (let index = 0; index < data[key].length; index++) {
+                                        let item = document.getElementById(data[key][index].id);
+                                        let DBvalue = data[key][index].value
+                                        item.value = DBvalue
+                                    }
+
+                                } catch (error) {
+                                    console.log(error)
+                                }
+                            }
                             break;
 
                         default:
                             break;
                     }
                 })
-
-
             })
-            // console.log('hey')
         }
-
         try {
             getResume()
         } catch (error) {

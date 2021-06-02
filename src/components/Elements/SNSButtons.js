@@ -2,13 +2,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { authService, firebaseInstance, realtimeDB } from '../../myBase'
 
 
-export const SNSLoginButton = ({ userType }) => {
+export const SNSLoginButton = ({ userType, newAccount }) => {
 
     const onSocialClick = async (event) => {
         event.preventDefault()
         const { target: { dataset: { icon } } } = event;
         let provider;
         let data;
+
 
         // 나중에 provider 다 들어가서 URL 을 바꿔줘야함. 일단은 localhost로 해뒀음
         try {
@@ -28,6 +29,11 @@ export const SNSLoginButton = ({ userType }) => {
                     break;
                 default:
                     break;
+            }
+            if (newAccount) {
+                realtimeDB.ref('users/' + authService.currentUser.uid).set({
+                    rate: 3.0
+                });
             }
             if (data !== null) {
                 let process = await realtimeDB.ref('users/' + authService.currentUser.uid).set({

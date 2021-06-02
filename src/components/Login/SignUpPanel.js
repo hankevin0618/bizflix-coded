@@ -33,7 +33,7 @@ const userTypeContainer = {
 }
 
 
-const SignUpPanel = ({ setIsSignInPage }) => {
+const SignUpPanel = ({ setIsSignInPage, newAccount }) => {
     const [isBuilderClicked, setIsBuilderClicked] = useState(true)
     const [userType, setUserType] = useState('builder')
     const onClick = () => {
@@ -98,7 +98,7 @@ const SignUpPanel = ({ setIsSignInPage }) => {
                 </div>
 
             </div>
-            <RightPanel type="signUp" userType={userType} />
+            <RightPanel type="signUp" userType={userType} newAccount={newAccount} />
         </>
 
     )

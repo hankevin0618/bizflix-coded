@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import backgroundImg from '../images/loginBG.jpg'
 
@@ -31,7 +31,15 @@ const contentBox = {
 
 const LoginPage = () => {
     const [isSignInPage, setIsSignInPage] = useState(true)
+    const [newAccount, setNewAccount] = useState(false)
 
+    useEffect(() => {
+        if (!isSignInPage) {
+            setNewAccount(true)
+        } else {
+            setNewAccount(false)
+        }
+    }, [isSignInPage])
 
 
     return (
@@ -48,7 +56,7 @@ const LoginPage = () => {
                     {
                         isSignInPage
                             ? <SignInPanel setIsSignInPage={setIsSignInPage} />
-                            : <SignUpPanel setIsSignInPage={setIsSignInPage} />
+                            : <SignUpPanel setIsSignInPage={setIsSignInPage} newAccount={newAccount} />
                     }
 
 

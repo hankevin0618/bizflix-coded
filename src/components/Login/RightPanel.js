@@ -17,7 +17,7 @@ const formStyle = {
     gridGap: ' 13px'
 }
 
-const RightPanel = ({ type, userType }) => {
+const RightPanel = ({ type, userType, newAccount }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUserName] = useState("")
@@ -110,7 +110,8 @@ const RightPanel = ({ type, userType }) => {
                     email,
                     displayName: username,
                     phoneNumber,
-                    userType
+                    userType,
+                    rate: 3.0
 
                 });
 
@@ -140,7 +141,7 @@ const RightPanel = ({ type, userType }) => {
                             Sign Up Options
                     </p>
                         <div className="d-flex p-3">
-                            <SNSLoginButton userType={userType} />
+                            <SNSLoginButton userType={userType} newAccount={newAccount} />
                         </div>
 
                     </div>
