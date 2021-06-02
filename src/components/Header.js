@@ -58,7 +58,6 @@ const Header = ({ loggedInUser, userType }) => {
                 :
                 <div className="d-flex ml-5" style={{ columnGap: '10px' }}>
                     <div><p style={{ textTransform: 'uppercase' }}>{userType}</p></div>
-                    <div>Score</div>
                     <Link to='/' onClick={onLogOutClick}>Logout</Link>
                 </div>
 

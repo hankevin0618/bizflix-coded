@@ -10,17 +10,25 @@ import {
     NavLink,
 } from 'reactstrap';
 import logoImage from "../images/logo_b.png"
-import { authService } from '../myBase';
+import { authService, realtimeDB } from '../myBase';
 
 
 const NavBar = ({ loggedInUser, userType }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [rate, setRate] = useState(0)
 
     let location = useLocation();
-
     let getNavMenu = location.pathname.slice(1) + 'Nav'
+    const getRate = async () => {
+        await realtimeDB.ref('users/' + authService.currentUser.uid + '/rate').on("value", function (snapshot) {
+            setRate(snapshot.val())
+        })
+    }
+
+
 
     useEffect(() => {
+        getRate()
         if (location.pathname !== '/') {
             try {
                 document.getElementById(getNavMenu).classList.add('active')
@@ -96,8 +104,9 @@ const NavBar = ({ loggedInUser, userType }) => {
 
                         :
                         <div className="d-flex ml-5" style={{ columnGap: '10px' }}>
+                            <div><p>Hi, {authService.currentUser.displayName}!</p></div>
                             <div><p style={{ textTransform: 'uppercase' }}>{userType}</p></div>
-                            <div>Score</div>
+                            <div>Rate: {rate} </div>
                             <Link to='/' onClick={onLogOutClick}>Logout</Link>
                         </div>
 

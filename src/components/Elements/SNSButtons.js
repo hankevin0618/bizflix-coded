@@ -30,18 +30,16 @@ export const SNSLoginButton = ({ userType, newAccount }) => {
                 default:
                     break;
             }
-            if (newAccount) {
-                realtimeDB.ref('users/' + authService.currentUser.uid).set({
-                    rate: 3.0
-                });
-            }
-            if (data !== null) {
+
+            if (data !== null && newAccount) {
                 let process = await realtimeDB.ref('users/' + authService.currentUser.uid).set({
                     email: authService.currentUser.email,
                     displayName: authService.currentUser.displayName,
                     phoneNumber: authService.currentUser.phoneNumber,
-                    userType
+                    userType,
+                    rate: 3.0
                 });
+
                 console.log(process)
 
             }
