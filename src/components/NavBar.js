@@ -16,6 +16,7 @@ import { authService, realtimeDB } from '../myBase';
 const NavBar = ({ loggedInUser, userType }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [rate, setRate] = useState(0)
+    const [username, setUsername] = useState("")
 
     let location = useLocation();
     let getNavMenu = location.pathname.slice(1) + 'Nav'
@@ -24,11 +25,15 @@ const NavBar = ({ loggedInUser, userType }) => {
             setRate(snapshot.val())
         })
     }
-
-
+    const getUsername = async () => {
+        await realtimeDB.ref('users/' + authService.currentUser.uid + '/displayName').on("value", function (snapshot) {
+            setUsername(snapshot.val())
+        })
+    }
 
     useEffect(() => {
         getRate()
+        getUsername()
         if (location.pathname !== '/') {
             try {
                 document.getElementById(getNavMenu).classList.add('active')
@@ -52,6 +57,7 @@ const NavBar = ({ loggedInUser, userType }) => {
         fontWeight: 600,
         marginLeft: '60vw'
     }
+
 
     const toggle = () => setIsOpen(!isOpen);
 
@@ -104,7 +110,7 @@ const NavBar = ({ loggedInUser, userType }) => {
 
                         :
                         <div className="d-flex ml-5" style={{ columnGap: '10px' }}>
-                            <div><p>Hi, {authService.currentUser.displayName}!</p></div>
+                            <div><p>Hi, {username}!</p></div>
                             <div><p style={{ textTransform: 'uppercase' }}>{userType}</p></div>
                             <div>Rate: {rate} </div>
                             <Link to='/' onClick={onLogOutClick}>Logout</Link>

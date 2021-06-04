@@ -86,3 +86,17 @@ button.snsBtn {
 .d-grid {
     display: grid;
 }
+
+.profile-leftPanel-button{
+    background-color: transparent;
+    margin: 20px;
+    text-align: left;
+    font-weight: normal;
+    border: none;
+}
+
+.active {
+    color: #2286E2 !important;
+    font-weight: bold;
+}
+
