@@ -1,7 +1,7 @@
 import React from 'react'
 import { authService } from "../myBase";
 import { useHistory } from "react-router-dom";
-import StripeContainer from "../components/StripeContainer"
+import StripeContainer from "../components/Payment/StripeContainer"
 
 const Subscription = () => {
     const history = useHistory();
