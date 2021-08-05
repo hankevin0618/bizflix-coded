@@ -41,7 +41,7 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
             }
         }
 
-    }, [verified, customerID])
+    }, [verified, customerID, isLoggedIn])
 
 
 

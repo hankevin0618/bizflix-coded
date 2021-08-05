@@ -93,3 +93,16 @@ p, span {
     font-family: 'Playfair Display', serif;
     font-weight: bold;
 }
+
+#hero{
+    background-image: url("https://cdn.pixabay.com/photo/2015/07/13/11/56/girl-843076_960_720.jpg");
+    height: 600px;
+    background-size: cover;
+    padding-top: 80px;
+    background-position: center;
+}
+
+#home-nav{
+    position: fixed;
+    background-image: linear-gradient(#000000ab, #ffff0000);
+}

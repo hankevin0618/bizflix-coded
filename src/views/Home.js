@@ -33,13 +33,41 @@ const Home = () => {
 
     return (
 
-        <div>
-            <h1>Dashboard Home</h1>
-            <h2 className="text-center">hey</h2>
+        <section className="container-fluid text-white" style={{ backgroundColor: 'black', minHeight: '100vh' }}>
+            <div id="hero-section" className="row">
+                <nav id="home-nav" className="col-12 p-2">
+                    <div className="px-5 d-flex">
+                        <h2 className="playfair-bold" style={{ color: '#00eeff' }}>BizFlix</h2>
+                        <div style={{ marginLeft: '5%', alignSelf: 'center' }}>
+                            <span className="px-3">Top 10</span>
+                            <span className="px-3">Featured</span>
+                            <span className="px-3">Workshops</span>
+
+                        </div>
+                    </div>
+                </nav>
+                <div id="hero">
+                    <div style={{ marginTop: '10%', marginLeft: '6%', }} >
+                        <h1 style={{ fontSize: '60px', fontWeight: 'bold' }}>BUSINESS CINEMA</h1>
+                        <h4 className="w-50">
+                            THE NEWEST AND MOST ACCESSIBLE INTERFACE IN BUSINESS COACHING THERE IS. NOWHERE ELSE CAN YOU GET THIS LEVEL OF KNOWLEDGE FOR YOUR BUSINESS, 24/7.
+                            YOURS TO WATCH ANYTIME, ANYWHERE.
+                        </h4>
+                    </div>
+                </div>
+            </div>
+
+            <div id="branding" className="row px-5" style={{ border: '1px solid white', marginTop: '5%', }}>
+                <div className="" >
+                    <h4 style={{ color: '#f5f5f5' }}>Branding</h4>
+
+                </div>
+            </div>
+
             <button style={{ marginTop: '50px' }} onClick={onLogOutClick}>Log Out</button>
             <button onClick={onUnsubscribe}>Unsubscribe</button>
 
-        </div>
+        </section>
 
     )
 }
