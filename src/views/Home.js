@@ -1,6 +1,7 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from "react-router-dom";
+import VideoFactory from '../components/Elements/VideoFactory';
 import { authService, realtimeDB } from '../myBase';
 
 
@@ -10,6 +11,22 @@ const Home = () => {
         authService.signOut();
         history.go(0)
     };
+
+    let topTenID = "8567071"
+    let strategyID = "8379385"
+    let salesID = "8379383"
+    let planningID = "8379382"
+    let mindsetID = "8379379"
+    let marketingID = "8379376"
+    let legacyID = "8379374"
+    let peopleID = "8379372"
+    let financeID = "8379370"
+    let brandingID = "8379364"
+
+    const [videos, setVideos] = useState([])
+
+
+
 
     const onUnsubscribe = async (e) => {
         e.preventDefault();
@@ -30,6 +47,10 @@ const Home = () => {
             console.log(res.data.error)
         }
     }
+
+    useEffect(() => {
+
+    }, [])
 
     return (
 
@@ -60,6 +81,8 @@ const Home = () => {
             <div id="branding" className="row px-5" style={{ border: '1px solid white', marginTop: '5%', }}>
                 <div className="" >
                     <h4 style={{ color: '#f5f5f5' }}>Branding</h4>
+
+                    <VideoFactory name="branding" categoryID={brandingID} />
 
                 </div>
             </div>
