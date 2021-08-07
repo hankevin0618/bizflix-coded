@@ -106,3 +106,61 @@ p, span {
     position: fixed;
     background-image: linear-gradient(#000000ab, #ffff0000);
 }
+
+.scroll-hidden::-webkit-scrollbar{
+    width: 0px;
+    background: transparent; /* Chrome/Safari/Webkit */
+}
+
+.video-scroll-button{
+    position: absolute;
+}
+
+.video-scroll-button button{
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+
+#player-popup{
+    background-image: radial-gradient(#2a2a2a, #1c1a1a);
+    position: fixed;
+    top: 2%;
+    left: 17%;
+    min-height: 800px;
+    display: block;
+    z-index: 2;
+    padding: 50px;
+    overflow-y: scroll;
+    display: none;
+}
+
+@media only screen and (max-width:766px) {
+    #player-popup{
+        left: 0%;
+    }
+}
+
+#dark-back{
+    position:fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.637);
+    top: 0%;
+    left:0%;
+    z-index: 1;
+    display: none;
+}
+
+#home-container{
+    background-image: radial-gradient(#2a2a2a, #1c1a1a);
+}
+
+.category-container img{
+    width:300px;
+}
+
+.category-container img:hover{
+    opacity: 50%;
+}

@@ -90,6 +90,7 @@ export default function SubscriptionForm({ email }) {
     }
 
 
+
     return (
         <>
             <form className="text-black" onSubmit={handleSubmitSub}>
