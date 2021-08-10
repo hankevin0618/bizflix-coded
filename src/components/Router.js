@@ -14,30 +14,36 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
     const [verified, setVerified] = useState(false)
     const [customerID, setCustomerID] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [showSubscription, setShowSubscription] = useState(false)
+
+    const GetCurrentCustomerID = async () => {
+        await realtimeDB.ref('users/' + authService.currentUser.uid).on('value', (snapshot) => {
+            const data = snapshot.val();
+            // console.log('Found Customer ID: ' + data.customerID)
+            setCustomerID(data.customerID)
+
+        })
+
+        if (customerID) {
+            const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/checkSub`, { "customerID": customerID })
+            if (res.data.ok) {
+                await setVerified(true)
+                setLoading(false)
+                // console.log('turned verified')
+            } else {
+                setShowSubscription(true)
+                setLoading(false)
+            }
+        } else {
+            setLoading(false)
+        }
+    }
 
 
     useEffect(() => {
-        if (isLoggedIn) {
+        if (isLoggedIn && !verified) {
             try {
-                const GetCurrentCustomerID = async () => {
-                    let userCID = await realtimeDB.ref('users/' + authService.currentUser.uid).on('value', (snapshot) => {
-                        const data = snapshot.val();
-                        // console.log('Found Customer ID: ' + data.customerID)
-                        setCustomerID(data.customerID)
-                        setLoading(false)
-                    })
-
-                    if (userCID) {
-                        const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/checkSub`, { "customerID": customerID })
-                        if (res.data.ok) {
-                            setVerified(true)
-                            setLoading(false)
-                            // console.log('turned verified')
-                        }
-                    }
-                }
                 GetCurrentCustomerID()
-
             } catch (error) {
                 console.log(error.message)
             }
@@ -51,8 +57,6 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
     return (
         <Router>
             <Switch>
-                {/* 지금 subscribing page에서 home으로 넘어가니까, verification page 를 만들어서 좀더 스무스한 페이지 이동을 하자 */}
-
                 {
                     isLoggedIn && loading &&
                     <Loading />
@@ -61,15 +65,15 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
                 {isLoggedIn && verified &&
                     <>
                         <Route exact path="/">
-                            <Home userObj={userObj} setVerified={setVerified} />
+                            <Home userObj={userObj} setLoading={setLoading} />
                         </Route>
                     </>
                 }
 
-                {isLoggedIn && !verified &&
+                {isLoggedIn && showSubscription &&
                     <>
                         <Route exact path="/">
-                            <Subscription userObj={userObj} setVerified={setVerified} />
+                            <Subscription />
                         </Route>
                     </>
                 }
@@ -78,7 +82,7 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
 
                 <>
                     <Route exact path="/">
-                        <Auth setVerified={setVerified} />
+                        <Auth setVerified={setVerified} setLoading={setLoading} />
                     </Route>
                 </>
 

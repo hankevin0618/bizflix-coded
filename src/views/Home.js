@@ -7,7 +7,7 @@ import Vimeo from '@u-wave/react-vimeo'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-const Home = () => {
+const Home = ({ setLoading }) => {
     const history = useHistory()
     const onLogOutClick = () => {
         authService.signOut();
@@ -50,6 +50,7 @@ const Home = () => {
             } else {
                 console.log(res.data.error)
             }
+            setLoading(false)
         }
     }
 
