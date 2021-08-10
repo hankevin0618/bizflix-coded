@@ -32,6 +32,7 @@ export default function SubscriptionForm({ email }) {
     const handleSubmitSub = async (event) => {
         event.preventDefault();
 
+
         if (!stripe || !elements) {
             // stripe has not yet loaded.
             // Make sure to disable the form submission until stripe.js has loaded
@@ -92,9 +93,10 @@ export default function SubscriptionForm({ email }) {
 
 
     return (
-        <>
+
+        <div className="row">
             <form className="text-black" onSubmit={handleSubmitSub}>
-                <fieldset className="FormGroup">
+                <fieldset className="FormGroup col-md-10">
                     <div className="FormRow " style={{ color: 'black' }}>
                         <CardElement options={CARD_OPTIONS} />
                     </div>
@@ -104,6 +106,7 @@ export default function SubscriptionForm({ email }) {
                     <input type="submit" value="Subscribe" className="main-button" />
                 </div>
             </form>
-        </>
+        </div>
+
     )
 }

@@ -5,6 +5,7 @@ import { authService } from "../myBase";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import Loading from './Elements/Loading';
 
 library.add(fab, fas);
 
@@ -26,7 +27,7 @@ function App() {
       {init ? (
         <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} />
       ) : (
-        "Initializing..."
+        <Loading />
       )}
 
     </>

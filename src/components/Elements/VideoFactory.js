@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const VideoFactory = ({ categoryID, categoryName, ShowPlayer }) => {
@@ -8,31 +8,31 @@ const VideoFactory = ({ categoryID, categoryName, ShowPlayer }) => {
     const [episodes, setEpisodes] = useState([])
 
 
-
-    const getEpisodes = async () => {
+    const getVideos = async () => {
         try {
             const res = await axios.post('http://localhost:4000/getThumbs', { categoryID })
 
             let data = res.data.data.data
             if (data) {
-                await setEpisodes(data)
+                let array = []
+                await data.forEach((element, i) => {
+                    array.push({ episode_list: element, key: i })
+                });
+                setEpisodes(array)
                 setIsVideoLoaded(true)
             }
-
-
-
         } catch (error) {
-            console.log(error)
+            console.log(error.message)
         }
+    }
+
+    if (!isVideoLoaded) {
+        getVideos();
     }
 
 
 
 
-    useEffect(() => {
-        getEpisodes()
-
-    }, [isVideoLoaded])
 
 
     if (isVideoLoaded) {
@@ -56,19 +56,20 @@ const VideoFactory = ({ categoryID, categoryName, ShowPlayer }) => {
 
 
         return (
-            <div className="my-5 category-container">
+            <div className="my-5 category-container d-block mx-auto position-relative">
                 <h4 style={{ color: '#f5f5f5' }}>{categoryName}</h4>
                 <div id={categoryID + "-container"} className="d-flex overflow-scroll scroll-hidden align-items-center">
-                    <div className="video-scroll-button" style={{ left: '1%' }}>
+                    <div className="video-scroll-button" style={{ left: '-5%', bottom: '50%' }}>
                         <button name="leftScroll" onClick={onScrollLeft} ><FontAwesomeIcon name="leftArrow" icon={['fas', 'angle-left']} size="3x" /></button>
                     </div>
                     {
                         episodes.map((episode, i) => {
+                            episode = episode.episode_list
                             return (
-                                <div className="">
+                                <div className="" key={categoryID + '-' + i} >
                                     <button className="transparent-button" onClick={ShowPlayer}  >
-                                        <img src={episode.pictures.sizes[3].link} name={episode.name} key={i} link={episode.link} description={episode.description} />
-
+                                        <img src={episode.pictures.sizes[3].link} name={episode.name} id={i} link={episode.link} description={episode.description} alt="episode_thumb" />
+                                        <p className="mt-2">Episode {i + 1}</p>
                                     </button>
                                     {/* <p className="overflow-hidden scroll-hidden text-center" style={{ width: '300px' }}>{episode.name}</p> */}
                                 </div>
@@ -78,10 +79,10 @@ const VideoFactory = ({ categoryID, categoryName, ShowPlayer }) => {
                     }
 
                     <div className="video-scroll-button"
-                        style={{ left: '95%' }}
+                        style={{ right: '-5%', bottom: '50%' }}
 
                     >
-                        <button name="rightScroll" onClick={onScrollRight}><div id="hey"><FontAwesomeIcon name="rightArrow" icon={['fas', 'angle-right']} size="3x" /></div></button>
+                        <button name="rightScroll" onClick={onScrollRight}><div><FontAwesomeIcon name="rightArrow" icon={['fas', 'angle-right']} size="3x" /></div></button>
                     </div>
                 </div>
             </div>

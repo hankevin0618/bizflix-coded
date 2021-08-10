@@ -29,10 +29,8 @@ p, span {
 }
 
 #loginForm input{
-
     background-color: #ffffff1f;
     color: white;
-    max-width: 300px;
     padding: 12px;
     border: 1px solid #f1f1f1;
     border-radius: 3px;
@@ -54,7 +52,6 @@ p, span {
 }
 
 .FormGroup {
-	width: 24vw;
 	display: block;
     margin: auto;
 	padding: 0;
@@ -96,7 +93,7 @@ p, span {
 
 #hero{
     background-image: url("https://cdn.pixabay.com/photo/2015/07/13/11/56/girl-843076_960_720.jpg");
-    height: 600px;
+    height: 80vh;
     background-size: cover;
     padding-top: 80px;
     background-position: center;
@@ -104,8 +101,36 @@ p, span {
 
 #home-nav{
     position: fixed;
-    background-image: linear-gradient(#000000ab, #ffff0000);
+    z-index: 10;
 }
+
+.nav-top{
+    animation-name: nav-top;
+    animation-duration: 1s;
+    animation-fill-mode:forwards;
+
+}
+
+.nav-off{
+    background-color: #161616;
+}
+
+#m-nav-opened{
+    background-color: rgb(30 29 29 / 88%);
+    height: auto;
+    width: 70%;
+    float: right;
+    animation-timing-function: ease-in;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 5px 6px 8px 4px #00000045;
+}
+
+@keyframes nav-top{
+    from {background-color: #161616; }
+    to {background-color: transparent; }
+}
+
 
 .scroll-hidden::-webkit-scrollbar{
     width: 0px;
@@ -127,7 +152,7 @@ p, span {
     background-image: radial-gradient(#2a2a2a, #1c1a1a);
     position: fixed;
     top: 2%;
-    left: 17%;
+    left: 20vw;
     min-height: 800px;
     display: block;
     z-index: 2;
@@ -139,6 +164,9 @@ p, span {
 @media only screen and (max-width:766px) {
     #player-popup{
         left: 0%;
+    }
+    #home-nav{
+        display: none;
     }
 }
 
@@ -157,10 +185,60 @@ p, span {
     background-image: radial-gradient(#2a2a2a, #1c1a1a);
 }
 
+.category-container{
+    max-width: 90% !important;
+}
+
 .category-container img{
     width:300px;
 }
 
 .category-container img:hover{
     opacity: 50%;
+    transition: 0.6s;
 }
+
+#announcementContainer{
+    margin-left: 5%;
+    height: 400px;
+    background-color: #202a33e5;
+    padding: 25px;
+    width: 400px;
+    border-radius: 15px;
+    color: #1fd3e0;
+    box-shadow: 2px 8px 11px 6px #00000033;
+}
+
+#loading-container {
+    background-color: black;
+    background-image: radial-gradient(#161515, #4545454d);
+    height: 100vh;
+    display: grid;
+    align-content: center;
+}
+
+#loading-anim{
+    height:50px;
+    width: 50px;
+    animation-name: loading-anim;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+}
+
+@keyframes loading-anim {
+    0% {
+        transform: rotate(20deg);
+        background-color: #ed8525;
+    }
+    70% {
+        transform: rotate(180deg);
+        background-color: #0069d2;
+        border-radius: 15%;
+    }
+
+    100%{
+        border-radius: 100%;
+    }
+}
+
