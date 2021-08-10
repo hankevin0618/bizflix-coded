@@ -50,7 +50,7 @@ export default function SubscriptionForm({ email }) {
             setError(result.error.message)
         } else {
             try {
-                const res = await axios.post('http://localhost:4000/sub', { payment_method: result.paymentMethod.id, email: email, })
+                const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/sub`, { payment_method: result.paymentMethod.id, email: email, })
                 // console.log(res.data)
 
                 const { client_secret, status } = res.data;
@@ -74,7 +74,7 @@ export default function SubscriptionForm({ email }) {
 
                 // Add customerID to user's database
                 if (res.data.customerID) {
-                    console.log(res.data.customerID)
+                    // console.log(res.data.customerID)
 
                     realtimeDB.ref('users/' + authService.currentUser.uid).update({
                         customerID: res.data.customerID,

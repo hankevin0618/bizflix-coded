@@ -64,8 +64,6 @@ const Auth = ({ setVerified }) => {
             return;
         }
 
-        console.log(data)
-
     }
 
     const onSubmit = async (event) => {

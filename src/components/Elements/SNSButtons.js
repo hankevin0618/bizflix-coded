@@ -39,9 +39,6 @@ export const SNSLoginButton = ({ userType, newAccount }) => {
                     userType,
                     rate: 3.0
                 });
-
-                console.log(process)
-
             }
 
 

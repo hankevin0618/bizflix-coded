@@ -56,7 +56,6 @@ const LoginForm = () => {
                 }
                 checkVerification()
             }
-            console.log(data);
         } catch (error) {
             setError(error.message);
         }

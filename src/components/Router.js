@@ -28,7 +28,7 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
                     })
 
                     if (userCID) {
-                        const res = await axios.post('http://localhost:4000/checkSub', { "customerID": customerID })
+                        const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/checkSub`, { "customerID": customerID })
                         if (res.data.ok) {
                             setVerified(true)
                             setLoading(false)
