@@ -10,7 +10,7 @@ const VideoFactory = ({ categoryID, categoryName, ShowPlayer }) => {
 
     const getVideos = async () => {
         try {
-            const res = await axios.post('http://localhost:4000/getThumbs', { categoryID })
+            const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/getThumbs`, { categoryID })
 
             let data = res.data.data.data
             if (data) {
@@ -29,8 +29,6 @@ const VideoFactory = ({ categoryID, categoryName, ShowPlayer }) => {
     if (!isVideoLoaded) {
         getVideos();
     }
-
-
 
 
 

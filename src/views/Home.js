@@ -41,7 +41,7 @@ const Home = () => {
                 customerID = snapshot.val().customerID;
 
             })
-            const res = await axios.post('http://localhost:4000/unsubscribe', { customerID })
+            const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/unsubscribe`, { customerID })
             if (res.data.ok) {
                 realtimeDB.ref('users/' + authService.currentUser.uid).update({
                     subscribing: false

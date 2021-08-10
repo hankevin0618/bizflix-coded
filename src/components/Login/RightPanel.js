@@ -47,9 +47,6 @@ const RightPanel = ({ type, userType, newAccount }) => {
             let data;
             data = await authService.signInWithEmailAndPassword(email, password);
             history.push("/profile")
-            console.log(data)
-
-
 
             // 페이먼트 시작하면 넣기
             // const checkVerification = async () => {
@@ -79,7 +76,7 @@ const RightPanel = ({ type, userType, newAccount }) => {
                     <div>
                         <p className="text-center font-weight-bold mt-5" style={{ color: 'dimgray' }}>
                             Sign In Options
-                    </p>
+                        </p>
                         <div className="d-flex p-3">
                             <SNSLoginButton userType={userType} />
                         </div>
@@ -139,7 +136,7 @@ const RightPanel = ({ type, userType, newAccount }) => {
                     <div>
                         <p className="text-center font-weight-bold mt-3" style={{ color: 'dimgray' }}>
                             Sign Up Options
-                    </p>
+                        </p>
                         <div className="d-flex p-3">
                             <SNSLoginButton userType={userType} newAccount={newAccount} />
                         </div>

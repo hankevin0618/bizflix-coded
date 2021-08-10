@@ -35,7 +35,7 @@ const PaymentForm = ({ productPrice }) => {
         if (!error) {
             try {
                 const { id } = paymentMethod;
-                const response = await axios.post("http://localhost:4000/payment", {
+                const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/payment`, {
                     //   amount is in cents
                     amount: productPrice,
                     id: id
