@@ -3,7 +3,7 @@ import { authService, realtimeDB } from "../myBase";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { firebaseInstance } from "../myBase";
 
-const Auth = ({ setVerified }) => {
+const Auth = ({ setVerified, setShowSubscription }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUserName] = useState("")
@@ -37,6 +37,7 @@ const Auth = ({ setVerified }) => {
                 case 'google':
                     provider = new firebaseInstance.auth.GoogleAuthProvider()
                     data = await authService.signInWithPopup(provider)
+
                     break;
 
                 case 'facebook':
@@ -55,13 +56,13 @@ const Auth = ({ setVerified }) => {
                     phoneNumber: authService.currentUser.phoneNumber,
 
                 });
-                console.log(process)
+                setShowSubscription(true)
 
             }
 
-
         } catch (error) {
-            console.error(error)
+            console.error(error.message)
+            setError(error.message)
             return;
         }
 
@@ -86,7 +87,7 @@ const Auth = ({ setVerified }) => {
                     email,
                     displayName: username,
                 });
-
+                setShowSubscription(true)
 
             } else {
                 data = await authService.signInWithEmailAndPassword(email, password);
@@ -125,7 +126,7 @@ const Auth = ({ setVerified }) => {
                             <p className="text-center">BizFlix is the newest, most accessible interface in business coach streaming there is. Nowhere else can you get this level of video content at this price. Enjoy ad-free episodes, masterclasses and mini films on the go. </p>
 
 
-                            <form id="loginForm" className="d-block" onSubmit={onSubmit}>
+                            <form id="loginForm" className="d-block col-xl-7 mx-auto" onSubmit={onSubmit}>
                                 <input
                                     name="email"
                                     type="email"

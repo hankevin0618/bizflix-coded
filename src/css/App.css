@@ -198,19 +198,21 @@ p, span {
 }
 
 .category-container img:hover{
-    opacity: 50%;
+    opacity: 80%;
     transition: 0.6s;
 }
 
 #announcementContainer{
     margin-left: 5%;
-    height: 400px;
+    height: 500px;
     background-color: #202a33e5;
     padding: 25px;
-    width: 400px;
+    width: 300px;
     border-radius: 15px;
     color: #1fd3e0;
     box-shadow: 2px 8px 11px 6px #00000033;
+    position: sticky;
+    top: 80px;
 }
 
 #loading-container {

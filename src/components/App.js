@@ -22,7 +22,7 @@ function App() {
       setInit(true);
     });
 
-  }, []);
+  }, [userObj]);
   return (
     <>
       {init ? (

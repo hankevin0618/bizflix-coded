@@ -13,81 +13,93 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
 
     const [verified, setVerified] = useState(false)
     const [customerID, setCustomerID] = useState(null)
-    const [loading, setLoading] = useState(true)
     const [showSubscription, setShowSubscription] = useState(false)
-
-    const GetCurrentCustomerID = async () => {
-        await realtimeDB.ref('users/' + authService.currentUser.uid).on('value', (snapshot) => {
-            const data = snapshot.val();
-            // console.log('Found Customer ID: ' + data.customerID)
-            setCustomerID(data.customerID)
-
-        })
-
-        if (customerID) {
-            const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/checkSub`, { "customerID": customerID })
-            if (res.data.ok) {
-                await setVerified(true)
-                setLoading(false)
-                // console.log('turned verified')
-            } else {
-                setShowSubscription(true)
-                setLoading(false)
-            }
-        } else {
-            setLoading(false)
-        }
-    }
+    const [loading, setLoading] = useState(false)
 
 
     useEffect(() => {
-        if (isLoggedIn && !verified) {
-            try {
-                GetCurrentCustomerID()
-            } catch (error) {
-                console.log(error.message)
+        if (isLoggedIn) {
+            setLoading(true)
+            console.log(showSubscription)
+
+
+            const fetchData = async () => {
+                await realtimeDB.ref('users/' + authService.currentUser.uid).on('value', (snapshot) => {
+                    const data = snapshot.val();
+                    setCustomerID(data.customerID)
+                    console.log(customerID)
+                })
+
+                if (customerID) {
+                    const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/checkSub`, { "customerID": customerID })
+                    if (res.data.ok) {
+                        setVerified(true)
+                    } else {
+                        setShowSubscription(true)
+                    }
+                } else {
+
+                }
             }
+            fetchData()
+
+            setLoading(false)
+
+        } else {
+            return null;
         }
 
-    }, [verified, customerID, isLoggedIn])
+
+
+    })
+
+    const HandleAuth = () => {
+
+        if (!isLoggedIn) {
+            return (
+                <Route exact path="/">
+                    <Auth userObj={userObj} setVerified={setVerified} setLoading={setLoading} setShowSubscription={setShowSubscription} />
+                </Route>
+            )
+        }
+
+        if (verified) {
+            return (
+                <Route exact path="/">
+                    <Home userObj={userObj} setLoading={setLoading} />
+                </Route>
+            )
+        }
+
+        if (showSubscription) {
+            return (
+                <Route exact path="/">
+                    <Subscription />
+                </Route>
+            )
+        }
+
+        return (
+            <Loading />
+        )
 
 
 
+    }
 
     return (
         <Router>
             <Switch>
-                {
-                    isLoggedIn && loading &&
+                {loading ?
                     <Loading />
-                }
-
-                {isLoggedIn && verified &&
+                    :
                     <>
-                        <Route exact path="/">
-                            <Home userObj={userObj} setLoading={setLoading} />
-                        </Route>
+                        <HandleAuth />
                     </>
+
                 }
-
-                {isLoggedIn && showSubscription &&
-                    <>
-                        <Route exact path="/">
-                            <Subscription />
-                        </Route>
-                    </>
-                }
-
-
-
-                <>
-                    <Route exact path="/">
-                        <Auth setVerified={setVerified} setLoading={setLoading} />
-                    </Route>
-                </>
-
             </Switch>
-        </Router >
-    );
+        </Router>
+    )
 };
 export default AppRouter;

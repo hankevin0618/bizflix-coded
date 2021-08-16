@@ -30,6 +30,7 @@ const Home = ({ setLoading }) => {
     const [episodeDescription, setEpisodeDescription] = useState('')
     const [episodeLink, setEpisodeLink] = useState('https://vimeo.com/577006350')
     const [episodeNum, setEpisodeNum] = useState('')
+    const [showAnnouncement, setShowAnnouncement] = useState(true)
 
 
 
@@ -87,8 +88,7 @@ const Home = ({ setLoading }) => {
 
     const onReveal = (e) => {
         e.preventDefault();
-        let getAnnouncement = document.getElementById('announcementContainer').classList;
-        getAnnouncement.remove('d-none')
+        setShowAnnouncement(true)
     }
 
     document.addEventListener('scroll', (e) => {
@@ -167,12 +167,62 @@ const Home = ({ setLoading }) => {
                             YOURS TO WATCH ANYTIME, ANYWHERE.
                         </h4>
                         <div className="w-25">
-                            <button className="main-button" onClick={onReveal}>Reveal</button>
+                            <button className="main-button">Button</button>
 
                         </div>
                     </div>
-                    <div id="announcementContainer" className="col-md-5 overflow-scroll scroll-hidden d-none" >
-                        <div className="col-12" style={{ textAlign: 'right' }}><button className="transparent-button text-white" onClick={() => { document.getElementById('announcementContainer').classList.add('d-none') }} ><FontAwesomeIcon icon={['fas', 'times-circle']} size="2x" /></button></div>
+
+                </div>
+            </div>
+
+
+
+            <div className="row px-5" style={{ marginTop: '5%', }}>
+                <div id="player-popup" className="text-center scroll-hidden col-md-8 col-lg-7 ">
+                    <div className="col-12" style={{ textAlign: 'right' }}><button className="transparent-button text-white" onClick={onClosePopup} ><FontAwesomeIcon icon={['fas', 'times-circle']} size="3x" /></button></div>
+                    <div className="col-12 my-3">
+                        <h2 style={{ fontWeight: 'bold' }}>{episodeTitle} </h2>
+                        <p>Full Screen - Double Click The Video</p>
+                        <p style={{ color: '#fe9005' }}>Episode {episodeNum} </p>
+                    </div>
+                    <div className="col-lg-12 col-xl-9 d-block mx-auto">
+                        <Vimeo
+                            video={episodeLink}
+                            responsive={true}
+                            width={500}
+                        />
+
+                    </div>
+                    <div className="col-md-9 col-lg-7 d-block mx-auto mt-3">
+                        <p>
+                            {episodeDescription}
+                        </p>
+                    </div>
+                </div>
+                <div id="dark-back"></div>
+                <div className={`col-sm-12 col-md-${showAnnouncement ? '9' : '12'}`}>
+                    {
+                        !showAnnouncement &&
+                        <div>
+                            <button className="transparent-button" style={{ color: 'rgb(0, 238, 255)', float: 'right' }} onClick={onReveal}>ANNOUNCEMENT</button>
+                        </div>
+
+                    }
+                    <VideoFactory categoryName="Strategy" categoryID={strategyID} ShowPlayer={ShowPlayer} />
+                    <VideoFactory categoryName="Planning" categoryID={planningID} ShowPlayer={ShowPlayer} />
+                    <VideoFactory categoryName="Mindset" categoryID={mindsetID} ShowPlayer={ShowPlayer} />
+                    <VideoFactory categoryName="Marketing" categoryID={marketingID} ShowPlayer={ShowPlayer} />
+                    <VideoFactory categoryName="People" categoryID={peopleID} ShowPlayer={ShowPlayer} />
+                    <VideoFactory categoryName="Finance" categoryID={financeID} ShowPlayer={ShowPlayer} />
+                    <VideoFactory categoryName="Sales" categoryID={salesID} ShowPlayer={ShowPlayer} />
+                </div>
+                <div className="col-sm-12 col-md-3">
+                    <div id="announcementContainer" className="col-md-5 overflow-scroll scroll-hidden" >
+                        <div className="col-12" style={{ textAlign: 'right' }}>
+                            <button className="transparent-button text-white" onClick={() => setShowAnnouncement(false)} >
+                                <FontAwesomeIcon icon={['fas', 'times-circle']} size="2x" />
+                            </button>
+                        </div>
 
                         <h4 className="text-center" style={{ fontWeight: 'bold' }}>Announcement</h4>
                         <div className="mt-4" style={{ color: '#cfcfcf' }}>
@@ -198,43 +248,6 @@ const Home = ({ setLoading }) => {
                         </div>
                     </div>
                 </div>
-            </div>
-
-
-
-            <div className="row px-5" style={{ marginTop: '5%', }}>
-                <div id="player-popup" className="text-center scroll-hidden col-md-8 col-lg-7 ">
-                    <div className="col-12" style={{ textAlign: 'right' }}><button className="transparent-button text-white" onClick={onClosePopup} ><FontAwesomeIcon icon={['fas', 'times-circle']} size="3x" /></button></div>
-                    <div className="col-12 my-3">
-                        <h2 style={{ fontWeight: 'bold' }}>{episodeTitle} </h2>
-                        <p>Full Screen - Double Click The Video</p>
-                        <p style={{ color: '#fe9005' }}>Episode {episodeNum} </p>
-                    </div>
-                    <div className="col-lg-12 col-xl-9 d-block mx-auto">
-                        <Vimeo
-                            video={episodeLink}
-                            responsive={true}
-                            width={500}
-                        />
-
-                    </div>
-                    <div className="col-md-9 col-lg-7 d-block mx-auto mt-3">
-                        <p>
-                            {episodeDescription}
-
-                        </p>
-                    </div>
-                </div>
-                <div id="dark-back"></div>
-                <VideoFactory categoryName="Strategy" categoryID={strategyID} ShowPlayer={ShowPlayer} />
-                <VideoFactory categoryName="Branding" categoryID={brandingID} ShowPlayer={ShowPlayer} />
-                <VideoFactory categoryName="Planning" categoryID={planningID} ShowPlayer={ShowPlayer} />
-                <VideoFactory categoryName="Mindset" categoryID={mindsetID} ShowPlayer={ShowPlayer} />
-                <VideoFactory categoryName="Marketing" categoryID={marketingID} ShowPlayer={ShowPlayer} />
-                <VideoFactory categoryName="Legacy" categoryID={legacyID} ShowPlayer={ShowPlayer} />
-                <VideoFactory categoryName="People" categoryID={peopleID} ShowPlayer={ShowPlayer} />
-                <VideoFactory categoryName="Finance" categoryID={financeID} ShowPlayer={ShowPlayer} />
-                <VideoFactory categoryName="Sales" categoryID={salesID} ShowPlayer={ShowPlayer} />
 
             </div>
 
