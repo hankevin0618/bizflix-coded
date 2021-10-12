@@ -1,47 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import { authService, realtimeDB } from "../myBase";
-import axios from 'axios';
-
+import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import Auth from "../views/Auth";
 import Home from "../views/Home";
-import Subscription from "../views/Subscription";
 import Loading from "./Elements/Loading";
+import InnerCourse from "./Course/InnerCourse";
+import Subscription from "../views/Subscription";
+import { authService, realtimeDB } from "../myBase";
+import axios from "axios";
+import MyAccount from "../views/MyAccount";
+import Header from "./Header";
 
 const AppRouter = ({ isLoggedIn, userObj }) => {
 
-
-    const [verified, setVerified] = useState(false)
-    const [customerID, setCustomerID] = useState(null)
-    const [showSubscription, setShowSubscription] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [isSubscribing , setIsSubscribing] = useState(false)
+    const [customerID , setCustomerID] = useState(null)
 
 
     useEffect(() => {
         if (isLoggedIn) {
-            setLoading(true)
-            console.log(showSubscription)
-
-
-            const fetchData = async () => {
+            const CheckSubscribing = async () => {
                 await realtimeDB.ref('users/' + authService.currentUser.uid).on('value', (snapshot) => {
                     const data = snapshot.val();
                     setCustomerID(data.customerID)
-                    console.log(customerID)
                 })
 
                 if (customerID) {
                     const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/checkSub`, { "customerID": customerID })
                     if (res.data.ok) {
-                        setVerified(true)
-                    } else {
-                        setShowSubscription(true)
-                    }
-                } else {
-
+                        setIsSubscribing(true)
+                    } 
+                } else{
+                    setIsSubscribing(false)
                 }
             }
-            fetchData()
+            CheckSubscribing()
 
             setLoading(false)
 
@@ -58,43 +51,49 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
         if (!isLoggedIn) {
             return (
                 <Route exact path="/">
-                    <Auth userObj={userObj} setVerified={setVerified} setLoading={setLoading} setShowSubscription={setShowSubscription} />
+                    <Auth userObj={userObj} setLoading={setLoading} />
                 </Route>
             )
         }
 
-        if (verified) {
-            return (
-                <Route exact path="/">
-                    <Home userObj={userObj} setLoading={setLoading} />
-                </Route>
-            )
-        }
-
-        if (showSubscription) {
-            return (
-                <Route exact path="/">
-                    <Subscription />
-                </Route>
-            )
-        }
 
         return (
-            <Loading />
+        <>
+            <Route exact path="/">
+                <Home userObj={userObj} setLoading={setLoading} />
+            </Route>
+            <Route path="/course/:categoryID/:episode">
+                <InnerCourse isSubscribing={isSubscribing} />
+            </Route>
+            <Route path="/payment">
+            {
+                !isSubscribing 
+                ?
+                <Subscription />
+                :
+                <Redirect to="/" />
+            }
+            </Route>
+        </>
         )
-
-
-
+        
     }
 
     return (
         <Router>
+            {
+                isLoggedIn &&
+                <Header isSubscribing={isSubscribing} />
+            }
             <Switch>
                 {loading ?
                     <Loading />
                     :
                     <>
                         <HandleAuth />
+                        <Route path="/my-account">
+                            <MyAccount isSubscribing={isSubscribing} />
+                        </Route>
                     </>
 
                 }

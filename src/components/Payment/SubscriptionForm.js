@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../../css/Payment.css';
 import { authService, realtimeDB } from '../../myBase';
 
-export default function SubscriptionForm({ email }) {
+export default function SubscriptionForm({ email, isMonthly }) {
 
     const [error, setError] = useState('');
 
@@ -50,10 +50,9 @@ export default function SubscriptionForm({ email }) {
             setError(result.error.message)
         } else {
             try {
-                const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/sub`, { payment_method: result.paymentMethod.id, email: email, })
-                // console.log(res.data)
+                const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/sub`, { payment_method: result.paymentMethod.id, email: email, isMonthly: isMonthly})
 
-                const { client_secret, status } = res.data;
+                const { client_secret, status, customerID } = res.data;
 
                 if (status === 'requires_action') {
                     stripe.confirmCardPayment(client_secret).then((result) => {
@@ -73,12 +72,9 @@ export default function SubscriptionForm({ email }) {
                 }
 
                 // Add customerID to user's database
-                if (res.data.customerID) {
-                    // console.log(res.data.customerID)
-
+                if (customerID) {
                     realtimeDB.ref('users/' + authService.currentUser.uid).update({
-                        customerID: res.data.customerID,
-                        subscribing: true
+                        customerID: customerID,
                     })
                 }
             } catch (error) {

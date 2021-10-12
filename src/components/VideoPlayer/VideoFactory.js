@@ -1,14 +1,15 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {Link} from 'react-router-dom'
 
-const VideoFactory = ({ categoryID, categoryName, ShowPlayer }) => {
+const VideoFactory = ({ categoryID, categoryName }) => {
 
     const [isVideoLoaded, setIsVideoLoaded] = useState(false)
     const [episodes, setEpisodes] = useState([])
 
 
-    const getVideos = async () => {
+    const getThumbs = async () => {
         try {
             const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/getThumbs`, { categoryID })
 
@@ -27,7 +28,7 @@ const VideoFactory = ({ categoryID, categoryName, ShowPlayer }) => {
     }
 
     if (!isVideoLoaded) {
-        getVideos();
+        getThumbs();
     }
 
 
@@ -64,11 +65,11 @@ const VideoFactory = ({ categoryID, categoryName, ShowPlayer }) => {
                         episodes.map((episode, i) => {
                             episode = episode.episode_list
                             return (
-                                <div className="" key={categoryID + '-' + i} >
-                                    <button className="transparent-button" onClick={ShowPlayer}  >
-                                        <img src={episode.pictures.sizes[3].link} name={episode.name} id={i} link={episode.link} description={episode.description} alt="episode_thumb" />
-                                        <p className="mt-2">Episode {i + 1}</p>
-                                    </button>
+                                <div id={categoryID} key={categoryID + '-' + i}  style={{marginRight: '30px'}}>
+                                    <Link to={`/course/${categoryID}/${i}`} className="transparent-button" style={{textDecoration:'none'}}  >
+                                        <img style={{visibility:'none'}} src={episode.pictures.sizes[3].link} name={episode.name} id={i} link={episode.link} description={episode.description} alt="episode_thumb" />
+                                        <p className="mt-2 text-center" style={{}}>Episode {i + 1}</p>
+                                    </Link>
                                     {/* <p className="overflow-hidden scroll-hidden text-center" style={{ width: '300px' }}>{episode.name}</p> */}
                                 </div>
                             )

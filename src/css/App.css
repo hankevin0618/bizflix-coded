@@ -1,250 +1,330 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Playfair+Display:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Playfair+Display:wght@400;500;600&display=swap");
 
-.border-1px{
-    border: 1px solid black;
+.border-1px {
+  border: 1px solid black;
 }
 
-h1, h2, h3{
-    font-family: 'Montserrat', sans-serif;
+h1,
+h2,
+h3 {
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: bold !important;
 }
 
-p, span {
-    font-family: Arial, Helvetica, sans-serif;
+p,
+span {
+  font-family: "Roboto", sans-serif;
 }
 
-
-.main-button{
-    width: 100% !important;
-    height: 52px !important;
-    font-size: 16px !important;
-    font-weight: 700 !important;
-    color: black !important;
-    background: #fe9005 !important;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 11%) !important;
-    border-radius: 2px !important;
-    outline: none !important;
-    border: 0 !important;
-    cursor: pointer !important;
-    margin-top: 9px !important;
+.main-button {
+  width: 100% !important;
+  height: 40px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: black !important;
+  background: #fe9005 !important;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 11%) !important;
+  border-radius: 2px !important;
+  outline: none !important;
+  border: 0 !important;
+  cursor: pointer !important;
+  margin-top: 9px !important;
 }
 
-#loginForm input{
-    background-color: #ffffff1f;
-    color: white;
-    padding: 12px;
-    border: 1px solid #f1f1f1;
-    border-radius: 3px;
-    margin-top: 10px;
-
+#loginForm input {
+  background-color: #ffffff1f;
+  color: white;
+  padding: 12px;
+  border: 1px solid #f1f1f1;
+  border-radius: 3px;
+  margin-top: 10px;
 }
 
-.transparent-button{
-    background-color: transparent;
-    border: none;
-    color: #fe9005;
-    font-weight: bold;
+.transparent-button {
+  background-color: transparent;
+  border: none;
+  color: #fe9005;
+  font-weight: bold;
 }
 
-.social-button{
-    background-color: transparent;
-    border: none;
-    color: white;
+.social-button {
+  background-color: transparent;
+  border: none;
+  color: white;
 }
 
 .FormGroup {
-	display: block;
-    margin: auto;
-	padding: 0;
-	border-style: none;
-	background-color: #f5f5f5;
-	will-change: opacity, transform;
-	border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.157);
+  display: block;
+  margin: auto;
+  padding: 0;
+  border-style: none;
+  background-color: #f5f5f5;
+  will-change: opacity, transform;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.157);
 }
 
 .FormRow {
-	display: -ms-flexbox;
-	display: flex;
-	-ms-flex-align: center;
-	align-items: center;
-	margin-left: 15px;
-
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: 15px;
 }
 
 .StripeElement--webkit-autofill {
-	background: transparent !important;
+  background: transparent !important;
 }
 
 .StripeElement {
-	width: 100%;
-	padding: 11px 15px 11px 0;
+  width: 100%;
+  padding: 11px 15px 11px 0;
 }
 
-#subscription-box{
-    min-height: 550px;
-    background-color: white;
-    box-shadow: 9px 11px 20px 5px #0000001a;
+#subscription-box {
+  min-height: 550px;
+  background-color: white;
+  box-shadow: 9px 11px 20px 5px #0000001a;
 }
 
-.playfair-bold{
-    font-family: 'Playfair Display', serif;
-    font-weight: bold;
+.playfair-bold {
+  font-family: "Playfair Display", serif;
+  font-weight: bold;
 }
 
-#hero{
-    background-image: url("https://cdn.pixabay.com/photo/2015/07/13/11/56/girl-843076_960_720.jpg");
-    height: 80vh;
-    background-size: cover;
-    padding-top: 80px;
-    background-position: center;
+#hero {
+  background-image: url("https://cdn.pixabay.com/photo/2015/07/13/11/56/girl-843076_960_720.jpg");
+  height: 80vh;
+  background-size: cover;
+  padding-top: 80px;
+  background-position: center;
 }
 
-#home-nav{
-    position: fixed;
-    z-index: 10;
+#home-nav {
+  position: fixed;
+  z-index: 10;
+  background-color: #000000d6 !important;
 }
 
-.nav-top{
-    animation-name: nav-top;
-    animation-duration: 1s;
-    animation-fill-mode:forwards;
-
+.nav-top {
+  animation-name: nav-top;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }
 
-.nav-off{
+.nav-off {
+  background-color: #161616;
+}
+
+#m-nav-opened {
+  background-color: rgb(30 29 29 / 88%);
+  height: auto;
+  width: 70%;
+  float: right;
+  animation-timing-function: ease-in;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 5px 6px 8px 4px #00000045;
+}
+
+#mobile-nav {
+  z-index: 10;
+}
+
+@keyframes nav-top {
+  from {
     background-color: #161616;
-}
-
-#m-nav-opened{
-    background-color: rgb(30 29 29 / 88%);
-    height: auto;
-    width: 70%;
-    float: right;
-    animation-timing-function: ease-in;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 5px 6px 8px 4px #00000045;
-}
-
-#mobile-nav{
-    z-index: 10;
-}
-
-@keyframes nav-top{
-    from {background-color: #161616; }
-    to {background-color: transparent; }
-}
-
-
-.scroll-hidden::-webkit-scrollbar{
-    width: 0px;
-    background: transparent; /* Chrome/Safari/Webkit */
-}
-
-.video-scroll-button{
-    position: absolute;
-}
-
-.video-scroll-button button{
+  }
+  to {
     background-color: transparent;
-    color: white;
-    font-weight: bold;
-    border: none;
+  }
 }
 
-#player-popup{
-    background-image: radial-gradient(#2a2a2a, #1c1a1a);
-    position: fixed;
-    top: 2%;
-    left: 20vw;
-    min-height: 800px;
-    display: block;
-    z-index: 2;
-    padding: 50px;
-    overflow-y: scroll;
+.scroll-hidden::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* Chrome/Safari/Webkit */
+}
+
+.video-scroll-button {
+  position: absolute;
+}
+
+.video-scroll-button button {
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+  border: none;
+}
+
+#player-popup {
+  background-image: radial-gradient(#2a2a2a, #1c1a1a);
+  position: fixed;
+  top: 2%;
+  left: 20vw;
+  min-height: 800px;
+  display: block;
+  z-index: 2;
+  padding: 50px;
+  overflow-y: scroll;
+  display: none;
+}
+
+@media only screen and (max-width: 766px) {
+  #player-popup {
+    left: 0%;
+  }
+  #home-nav {
     display: none;
+  }
 }
 
-@media only screen and (max-width:766px) {
-    #player-popup{
-        left: 0%;
-    }
-    #home-nav{
-        display: none;
-    }
+#dark-back {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.637);
+  top: 0%;
+  left: 0%;
+  z-index: 1;
+  display: none;
 }
 
-#dark-back{
-    position:fixed;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.637);
-    top: 0%;
-    left:0%;
-    z-index: 1;
-    display: none;
+#home-container {
+  background-image: radial-gradient(#2a2a2a, #1c1a1a);
 }
 
-#home-container{
-    background-image: radial-gradient(#2a2a2a, #1c1a1a);
+.category-container {
+  max-width: 90% !important;
 }
 
-.category-container{
-    max-width: 90% !important;
+.category-container img {
+  width: 300px;
 }
 
-.category-container img{
-    width:300px;
-}
-
-.category-container img:hover{
-    opacity: 80%;
-    transition: 0.6s;
-}
-
-#announcementContainer{
-    margin-left: 5%;
-    height: 500px;
-    background-color: #202a33e5;
-    padding: 25px;
-    width: 300px;
-    border-radius: 15px;
-    color: #1fd3e0;
-    box-shadow: 2px 8px 11px 6px #00000033;
-    position: sticky;
-    top: 80px;
+#announcementContainer {
+  margin-left: 5%;
+  height: 500px;
+  background-color: #202a33e5;
+  padding: 25px;
+  width: 300px;
+  border-radius: 15px;
+  color: #1fd3e0;
+  box-shadow: 2px 8px 11px 6px #00000033;
+  position: sticky;
+  top: 80px;
 }
 
 #loading-container {
-    background-color: black;
-    background-image: radial-gradient(#161515, #4545454d);
-    height: 100vh;
-    display: grid;
-    align-content: center;
+  background-color: black;
+  background-image: radial-gradient(#161515, #4545454d);
+  height: 100vh;
+  display: grid;
+  align-content: center;
 }
 
-#loading-anim{
-    height:50px;
-    width: 50px;
-    animation-name: loading-anim;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
+#loading-anim {
+  height: 50px;
+  width: 50px;
+  animation-name: loading-anim;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
 }
 
 @keyframes loading-anim {
-    0% {
-        transform: rotate(20deg);
-        background-color: #ed8525;
-    }
-    70% {
-        transform: rotate(180deg);
-        background-color: #0069d2;
-        border-radius: 15%;
-    }
+  0% {
+    transform: rotate(20deg);
+    background-color: #ed8525;
+  }
+  70% {
+    transform: rotate(180deg);
+    background-color: #0069d2;
+    border-radius: 15%;
+  }
 
-    100%{
-        border-radius: 100%;
-    }
+  100% {
+    border-radius: 100%;
+  }
 }
 
+#login-popup {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.356);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#login-popup-content {
+  background-color: white;
+  min-height: 50%;
+  width: 50%;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#sliderBanner {
+  /* animation: imageAnimation 20s infinite 0s; */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.52),
+      rgba(0, 0, 0, 0.288)
+    ),
+    url("https://www.navig8biz.com/wp-content/uploads/2021/09/LR_Mentor_015-2.jpg");
+}
+
+@keyframes imageAnimation {
+  0% {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.52),
+        rgba(0, 0, 0, 0.288)
+      ),
+      url("https://www.navig8biz.com/wp-content/uploads/2021/09/LR_Mentor_015-2.jpg");
+  }
+  20% {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.52),
+        rgba(0, 0, 0, 0.288)
+      ),
+      url("https://www.navig8biz.com/wp-content/uploads/2021/09/LR_Walls_036.jpg");
+  }
+  40% {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.52),
+        rgba(0, 0, 0, 0.288)
+      ),
+      url("https://www.navig8biz.com/wp-content/uploads/2021/09/LR_Walls_003.jpg");
+  }
+  60% {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.52),
+        rgba(0, 0, 0, 0.288)
+      ),
+      url("https://www.navig8biz.com/wp-content/uploads/2021/09/LR_Mentor_097.jpg");
+  }
+  80% {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.52),
+        rgba(0, 0, 0, 0.288)
+      ),
+      url("https://www.navig8biz.com/wp-content/uploads/2021/09/LR_Walls_003.jpg");
+  }
+  100% {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.52),
+        rgba(0, 0, 0, 0.288)
+      ),
+      url("https://www.navig8biz.com/wp-content/uploads/2021/09/LR_Mentor_015-2.jpg");
+  }
+}
